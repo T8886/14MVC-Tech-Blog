@@ -6,22 +6,33 @@ const postData = require('./postData.json');
 const commentData = require('./commentData.json');
 
 const seedDatabase = async () => {
-  await sequelize.sync({ force: true });
-
-  const users = await User.bulkCreate(userData, {
-    individualHooks: true,
-    returning: true,
-  });
-
-  const posts = await Post.bulkCreate(postData, {
-    individualHooks: true,
-    returning: true,
-  });
-
-  const comments = await Comment.bulkCreate(commentData, {
-    individualHooks: true,
-    returning: true,
-  });
+  try {
+    await sequelize.sync({ force: true });
+  
+    const users = await User.bulkCreate(userData, {
+      individualHooks: true,
+      returning: true,
+    });
+    console.info("user seeds", users)
+    const posts = await Post.bulkCreate(postData, {
+      individualHooks: true,
+      returning: true,
+    });
+    console.info("user seeds", posts)
+    const comments = await Comment.bulkCreate(commentData, {
+      individualHooks: true,
+      returning: true,
+    });
+    console.info("user seeds", comments)
+  } catch (error) {
+    if (error){
+      console.error(err);
+      throw error
+    }
+    throw new Error("unknown seed script error")
+  } finally {
+    console.info("finally")
+  }
 
   process.exit(0);
 };

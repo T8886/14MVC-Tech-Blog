@@ -17,7 +17,6 @@ Post.init(
     },
     content: {
       type: DataTypes.TEXT,
-      // TEXT is unlimited in length - STRING defaults to 255 characters in length
       allowNull: false,
     },
     user_id: {
