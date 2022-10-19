@@ -1,3 +1,4 @@
+// Most of the code is taken from the previous activities
 const User = require('./User');
 const Post = require('./Post');
 const Comment = require('./Comment');

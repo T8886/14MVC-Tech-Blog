@@ -1,3 +1,4 @@
+// Most of the code is taken from the previous activities
 const {Model,DataTypes} = require('sequelize');
 const sequelize = require('../config/connection');
 
