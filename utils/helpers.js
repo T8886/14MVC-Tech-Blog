@@ -1,3 +1,4 @@
+// Code is taken from previous activities
 function formatDate(date) {
   return `${new Date(date).getMonth() + 1}/${new Date(date).getDate()}/${new Date(
       date
