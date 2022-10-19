@@ -7,29 +7,28 @@ const {
     Comment
 } = require('../models');
 
-
 router.get('/', (req, res) => {
     Post.findAll({
-            attributes: [
-                'id',
-                'title',
-                'content',
-                'created_at'
-            ],
-            include: [{
-                    model: Comment,
-                    attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-                    include: {
-                        model: User,
-                        attributes: ['username']
-                    }
-                },
-                {
-                    model: User,
-                    attributes: ['username']
-                }
-            ]
-        })
+        attributes: [
+            'id',
+            'title',
+            'content',
+            'created_at'
+        ],
+        include: [{
+            model: Comment,
+            attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+            include: {
+                model: User,
+                attributes: ['username']
+            }
+        },
+        {
+            model: User,
+            attributes: ['username']
+        }
+        ]
+    })
         .then(dbPostData => {
             const posts = dbPostData.map(post => post.get({
                 plain: true
@@ -48,29 +47,29 @@ router.get('/', (req, res) => {
 
 router.get('/post/:id', (req, res) => {
     Post.findOne({
-            where: {
-                id: req.params.id
-            },
-            attributes: [
-                'id',
-                'title',
-                'content',
-                'created_at'
-            ],
-            include: [{
-                    model: Comment,
-                    attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-                    include: {
-                        model: User,
-                        attributes: ['username']
-                    }
-                },
-                {
-                    model: User,
-                    attributes: ['username']
-                }
-            ]
-        })
+        where: {
+            id: req.params.id
+        },
+        attributes: [
+            'id',
+            'title',
+            'content',
+            'created_at'
+        ],
+        include: [{
+            model: Comment,
+            attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+            include: {
+                model: User,
+                attributes: ['username']
+            }
+        },
+        {
+            model: User,
+            attributes: ['username']
+        }
+        ]
+    })
         .then(dbPostData => {
             if (!dbPostData) {
                 res.status(404).json({
@@ -111,7 +110,6 @@ router.get('/signup', (req, res) => {
 
     res.render('signup');
 });
-
 
 router.get('*', (req, res) => {
     res.status(404).send("Can't go there!");
