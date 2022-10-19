@@ -8,9 +8,7 @@ const helpers = require('./utils/helpers');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const hbs = exphbs.create({
-    helpers
-});
+const hbs = exphbs.create({helpers});
 
 const sess = {
     secret: process.env.DB_SECRET,
