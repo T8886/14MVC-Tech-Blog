@@ -88,7 +88,7 @@ This Challenge is graded based on the following criteria:
 
     * Uses the [express-handlebars](https://www.npmjs.com/package/express-handlebars) package to implement Handlebars.js for your Views.
 
-    * Application must be deployed to Heroku.
+    <!-- * Application must be deployed to Heroku. -->
 
 ### Deployment: 32%
 
