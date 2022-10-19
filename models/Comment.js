@@ -1,44 +1,44 @@
-const { Model, DataTypes } = require('sequelize');
+const {Model,DataTypes} = require('sequelize');
 const sequelize = require('../config/connection');
 
 class Comment extends Model {}
 
-Comment.init(
-  {
+Comment.init({
     id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true
     },
     comment_text: {
-      type: DataTypes.TEXT,
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            len: [1]
+        }
     },
     user_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'user',
-        key: 'id',
-      },
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'user',
+            key: 'id'
+        }
     },
     post_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'post',
-        key: 'id',
-      },
-    },
-  },
-  {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'post',
+            key: 'id'
+        }
+    }
+}, {
     sequelize,
-    // we want the timestamps
-    // timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'comment',
-  }
-);
+    modelName: 'comment'
+})
+
 
 module.exports = Comment;
